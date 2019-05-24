@@ -4,6 +4,9 @@ import appConfig from "./modules/app-config";
 import actionConfig from "./modules/action-config";
 import imageStore from "./modules/image-store";
 import labelData from "./modules/label-data";
+import { alert } from "./modules/alert";
+import { account } from "./modules/account";
+import { users } from "./modules/users";
 
 Vue.use(Vuex);
 
@@ -33,7 +36,10 @@ const store = new Vuex.Store({
     "app-config": appConfig,
     "action-config": actionConfig,
     "image-store": imageStore,
-    "label-data": labelData
+    "label-data": labelData,
+    alert,
+    account,
+    users
   },
   getters,
   mutations

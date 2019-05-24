@@ -26,8 +26,6 @@ Check out the current project progress by taking a look at the [checklist](check
   - Coco json will either decode a shape as a circle or a polygon. As there is no reliable way of determining if a shape is a rectangle or a polygon
 - __Encode Dlib XML__
   - Label shall be encoded with either the shape.label or shape.type
-- __Google Analytics__
-  - Modified the data sent to google analytics
 
 ## Removed Features
 - __gridlines__

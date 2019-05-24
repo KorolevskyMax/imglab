@@ -9,56 +9,65 @@
         <div class="col-6 col-sm-6 col-md-7 col-xl-7 text-center">
           <!-- form-inline input-group -->
           <div class="row justify-content-center align-content-center">
-            <a href="https://github.com/NaturalIntelligence/imglab">
-			        <img src="./assets/imglab_logo.png" height="48px" style="margin-top: 2px">
-              <span style="font-size: 2em; margin-top:5px;">Img Lab</span>
-  					</a>
+            <a href="https://github.com/korolevskymax/imglab">
+              <img src="../../assets/logo.png" height="48px" style="margin-top: 2px">
+            </a>
           </div>
         </div>
         <div class="col-3 col-sm-4 col-md-4 col-xl-4">
           <div class="form-inline flex-row-reverse float-right">
-            <!-- <a class="btn btn-info" onclick="javascript:displayDonationPrompt()" style="margin: 0px 10px;">Donate</a> -->
-            <!-- <shortcuts class="d-none d-md-block"></shortcuts>
-            <plugins-menu class="d-none d-md-block"></plugins-menu> -->
+            <button class="btn btn-info">
+              <router-link to="/login">Logout</router-link>
+            </button>
+            <!--<a class="btn btn-info" onclick="javascript:displayDonationPrompt()" style="margin: 0px 10px;">Donate</a>-->
+            <!--<shortcuts class="d-none d-md-block"></shortcuts>-->
+            <!--<plugins-menu  class="d-none d-md-block"></plugins-menu>-->
           </div>
         </div>
+
       </div>
       <!-- End of Menubar -->
-      <div class="row" style="height: 95vh">
-        <div id="toolbar" class="col-1 overlay-color grey-border">
+    </div>
+
+    <div class="flex-row">
+      <div class="d-flex flex-row" style="height: calc(100vh - 50px);">
+        <div id="toolbar" class="d-flex flex-column overlay-color grey-border">
           <toolbox :toolType="LABEL_TAG"></toolbox>
-          <toolbox :toolType="CANVAS_TAG" class="toolbox-border-top"></toolbox>
-          <mouse-coord></mouse-coord>
+          <toolbox :toolType="CANVAS_TAG" class="mt-auto toolbox-border-top"></toolbox>
         </div>
-        <div class="col-9 base-color" style="height: 100%;">
+        <div class="d-flex flex-column base-color" style="width: 100vw">
           <div>
-            <actionbar style="height: 10%"></actionbar>
+            <actionbar></actionbar>
+            <mouse-coord></mouse-coord>
           </div>
-          <div style="height: 75%;">
+          <div>
             <workarea></workarea>
           </div>
-          <div class="grey-border" style="height: 15%; width: 100%; margin: 0px 2px;">
-            <image-slider thumbnail-width="90px"></image-slider>
+          <div class="grey-border mt-auto" style="height: 100px; width: 100%; margin: 0px 2px;">
+            <image-slider thumbnail_width="90px" class="mt-auto"></image-slider>
           </div>
         </div>
-        <div class="col-2 overlay-color grey-border">
-          <label-panel style="flex: 1; overflow: auto;"></label-panel>
+        <div id="sidebar" class="p-2 overlay-color grey-border" style="width: 350px;">
+          <label-panel></label-panel>
         </div>
       </div>
+
+      <!--<div id="snackbar"></div>-->
+      <!--<plugin-window></plugin-window>-->
     </div>
   </div>
 </template>
 
 <script>
-import ActionBar from "./components/action-bar/action-bar";
-import ToolBox from "./components/tools/toolbox";
-import WorkArea from "./components/workarea/workarea";
-import ImageSlider from "./components/image-slider/image-slider";
-import LabelPanel from "./components/label-panel/label-panel";
-import Menu from "./components/menu/menu";
-import MouseCoord from "./components/mouse-coordinates/mouse-coordinates";
-import PromptRestoreData from "./components/prompt-restore-data/restore-data";
-import { LABEL_TAG, CANVAS_TAG } from "./utils/tool-names";
+import ActionBar from "../action-bar/action-bar";
+import ToolBox from "../tools/toolbox";
+import WorkArea from "../workarea/workarea";
+import ImageSlider from "../image-slider/image-slider";
+import LabelPanel from "../label-panel/label-panel";
+import Menu from "../menu/menu";
+import MouseCoord from "../mouse-coordinates/mouse-coordinates";
+import PromptRestoreData from "../prompt-restore-data/restore-data";
+import { LABEL_TAG, CANVAS_TAG } from "../../utils/tool-names";
 
 export default {
   components: {

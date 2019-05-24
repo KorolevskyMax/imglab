@@ -11,6 +11,7 @@
     >
       <img
         v-if="tool.icon.isSVG"
+        class="tool-icon"
         :src="require('../../assets/icons/' + tool.icon.name)"
         :alt="tool.title"
       >
@@ -21,7 +22,7 @@
       >
       </font-awesome-icon>
       <div>
-        {{ tool.title }}
+        {{ tool.title.charAt(0).toUpperCase() + tool.title.slice(1) }}
       </div>
     </div>
   </div>
@@ -142,6 +143,19 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .tool-button{
+    text-align: center;
+    margin: 14px 0px;
+    font-size: 0.9em;
+  }
+  .tool-icon{
+    width: 40%;
+    margin: 3px 0px;
+    font-size: 1.5em;
+  }
+  .tool-button:not(.tool-selected):hover{
+    background: grey;
+  }
   .tool-selected{
     background: coral;
   }

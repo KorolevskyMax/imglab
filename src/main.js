@@ -1,10 +1,11 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "./components/app/App.vue";
 import store from "./store/store";
 import svgjs from "./plugins/svg";
+import { router } from "./utils";
 import Draggable from "vuedraggable";
+import VeeValidate from "vee-validate";
 import AutocompleteInput from "./components/autocomplete-input/autocomplete-input";
-import VueAnalytics from "vue-analytics";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faBars,
@@ -25,11 +26,11 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./assets/css/bootstrap.min.css";
+import "./assets/css/tags.min.css";
+import "./assets/css/style.min.css";
 
-Vue.use(VueAnalytics, {
-  id: "UA-119603824-1"
-});
+Vue.use(VeeValidate);
 Vue.use(svgjs);
 
 library.add(
@@ -56,5 +57,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   store,
+  router,
   render: h => h(App)
 }).$mount("#app");

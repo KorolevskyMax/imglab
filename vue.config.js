@@ -1,3 +1,40 @@
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
-  lintOnSave: false
+  lintOnSave: false,
+  configureWebpack: {
+    mode: "development",
+    entry: ["./src/main.js"],
+    // resolve: {
+    //   extensions: [".js", ".vue"]
+    // },
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /\.vue?$/,
+    //       exclude: /(node_modules)/,
+    //       use: "vue-loader"
+    //     },
+    //     {
+    //       test: /\.js?$/,
+    //       exclude: /(node_modules)/,
+    //       use: "babel-loader"
+    //     }
+    //   ]
+    // },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: "./public/index.html"
+      })
+    ],
+    devServer: {
+      historyApiFallback: true
+    },
+    externals: {
+      // global app config object
+      config: JSON.stringify({
+        apiUrl: "http://localhost:4000"
+      })
+    }
+  }
 };

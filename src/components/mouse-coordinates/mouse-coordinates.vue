@@ -1,8 +1,10 @@
 <template lang="html">
   <div>
-    <small v-show="show">
-      {{ x }}, {{ y }}
-    </small>
+    <span id="tooltip-span" v-show="show" :style="{ left: x + 70 + 'px', top: y + 60 + 'px' }">
+      x:{{ x }}<br>
+      y:{{ y }}
+    </span>
+
   </div>
 </template>
 

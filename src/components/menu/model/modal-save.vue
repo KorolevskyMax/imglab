@@ -11,16 +11,15 @@
       :value="defaultvalues[filetype]"
       :ext="filetype"
       @close="showSaveDialog = true"
-      @input="saveAs($event, filetype)"
+      @input="saveAs($event, filetype, account.user)"
     >
     </modal-get-filename>
   </transition>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import {
-  getStoreData,
   encodeAsNimn,
   encodeAsDlibXML,
   encodeAsDlibPts,
@@ -50,83 +49,21 @@ export default {
         [Ext.DLIB_PTS]: "_dlib_pts",
         [Ext.COCO_JSON]: "_coco"
       },
-      // Selected file type / exntension
+      // Selected file type / extension
       filetype: null,
       // Boolean toggle for displaying save options / get filename component
       showSaveDialog: true
     };
   },
   computed: {
+    ...mapState({
+      account: state => state.account
+    }),
     ...mapGetters("action-config", {
       selectedShapeID: "getSelectedShape"
     })
   },
   methods: {
-    /**
-     * Google analytics: Report file metadata
-     * @param {String} filetype - file type
-     */
-    analyticsReport(filetype) {
-      this.analyticsFileType(filetype);
-      this.analyticsImageStore();
-      this.analyticsLabelData();
-    },
-
-    /**
-     * Sends metadata about the image store to google analytics
-     */
-    analyticsImageStore() {
-      let storeData = getStoreData(this.$store);
-      let imageStore = storeData["image-store"];
-
-      this.$ga.event({
-        eventCategory: "image - count",
-        eventAction: "save",
-        eventLabel: `${Object.keys(imageStore.images).length} images`
-      });
-
-      this.$ga.event({
-        eventCategory: "shape - count",
-        eventAction: "save",
-        eventLabel: `${Object.keys(imageStore.shapes).length} shapes`
-      });
-
-      this.$ga.event({
-        eventCategory: "points - count",
-        eventAction: "save",
-        eventLabel: `${
-          Object.keys(imageStore.featurePoints).length
-        } feature points`
-      });
-    },
-
-    /**
-     * Sends label metadata to google analytics
-     */
-    analyticsLabelData() {
-      let storeData = getStoreData(this.$store);
-      let labelData = storeData["label-data"];
-
-      labelData.categories.forEach(category => {
-        this.$ga.event({
-          eventCategory: "category",
-          eventAction: "save",
-          eventLabel: category
-        });
-      });
-    },
-
-    /**
-     * Sends file type to google analytics
-     */
-    analyticsFileType(filetype) {
-      this.$ga.event({
-        eventCategory: "filetype",
-        eventAction: "save",
-        eventLabel: filetype
-      });
-    },
-
     /**
      * Save given data to a file
      * @param {*} data - string data
@@ -154,7 +91,7 @@ export default {
      * @param {String} filename - filename that includes the file extension
      * @param {String} filetype - used to determine which handler to call
      */
-    saveAs(filename, filetype) {
+    saveAs(filename, filetype, user) {
       this.filetype = null;
       this.showSaveDialog = true;
 
@@ -164,14 +101,13 @@ export default {
         return;
       }
 
-      this.analyticsReport(filetype);
       switch (filetype) {
         case Ext.NIMN: {
           this.saveAsNimn(filename);
           break;
         }
         case Ext.DLIB_XML: {
-          this.saveAsDlibXml(filename);
+          this.saveAsDlibXml(filename, user);
           break;
         }
         case Ext.DLIB_PTS: {
@@ -210,8 +146,8 @@ export default {
      * Save project as dlib xml
      * @param {String} filename - file name
      */
-    saveAsDlibXml(filename) {
-      let dlibXML = encodeAsDlibXML(this.$store);
+    saveAsDlibXml(filename, user) {
+      let dlibXML = encodeAsDlibXML(this.$store, user);
       this.download(dlibXML, filename, "text/xml");
     },
 

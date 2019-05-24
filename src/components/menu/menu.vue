@@ -4,7 +4,7 @@
       <div class="dropbtn">
         <font-awesome-icon
           :icon="['fas', 'bars']"
-          style="font-size:1.5em; color: green"
+          style="font-size:1.5em;"
         >
         </font-awesome-icon>
       </div>

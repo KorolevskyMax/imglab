@@ -730,26 +730,6 @@ Proceeds to encode store data and save it into the file if valid.
 
 ## methods
 
-- `analyticsReport(filetype)`
-
-  Google analytics: Report file metadata
-
-  **parameters:**
-
-     - `filetype` **String** - file type
-
-- `analyticsImageStore()`
-
-  Sends metadata about the image store to google analytics
-
-- `analyticsLabelData()`
-
-  Sends label metadata to google analytics
-
-- `analyticsFileType(filetype)`
-
-  Sends file type to google analytics
-
 - `download(data, filename, type)`
 
   Save given data to a file

@@ -3,7 +3,7 @@
     id="canvas-container">
     <div
       class="canvas-wrapper"
-      :style="{ width: (imageWidth + 50) + 'px', height: (imageHeight + 50) + 'px' }">
+      :style="{ width: '75vw', height: '80vh' }">
       <img
         id="img"
         :src="imageSrc"
@@ -19,6 +19,7 @@
         @mousedown="mouseDown"
         @mouseup="mouseUp"
       >
+      <span id="tooltip-span"></span>
       </div>
     </div>
   </div>
